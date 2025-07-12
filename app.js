@@ -29,7 +29,10 @@ app.set("views", path.join(__dirname, "views"));
 app.use("/", require("./routes/auth"));
 app.use("/", require("./routes/swap"));
 app.use("/", require("./routes/main"));
+app.use("/", require("./routes/register"));
 app.use("/", require("./routes/profile"));
+
+
 
 
 // Start

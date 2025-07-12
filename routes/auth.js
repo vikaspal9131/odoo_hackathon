@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/User");
+const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 
 // Login Form
@@ -23,13 +23,22 @@ router.post("/login", async (req, res) => {
   }
 
   req.session.user = user;
-  res.redirect("/dashboard");
+  res.redirect("/");
 });
 
-// Dashboard
-router.get("/dashboard", (req, res) => {
-  if (!req.session.user) return res.redirect("/login");
-  res.render("users/dashboard", { user: req.session.user });
+
+// Logout route
+router.post("/logout", (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      console.error("Logout Error:", err);
+      return res.redirect("/");
+    }
+    res.clearCookie("connect.sid");
+    res.redirect("/");
+  });
 });
+
+
 
 module.exports = router;

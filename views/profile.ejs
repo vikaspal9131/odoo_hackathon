@@ -13,7 +13,7 @@
     <div class="flex items-center space-x-4">
       <a href="/swap-requests" class="hover:underline">Swap Request</a>
       <a href="/" class="hover:underline">Home</a>
-      <img src="<%= user.profilePhoto || 'https://i.pravatar.cc/40' %>" alt="Profile" class="w-10 h-10 rounded-full">
+      <img src="<%= user?.profilePhoto || 'https://i.pravatar.cc/40' %>" alt="Profile" class="w-10 h-10 rounded-full">
     </div>
   </header>
 
@@ -29,23 +29,31 @@
         </button>
       </form>
 
-      <h2 class="text-2xl font-bold mb-4"><%= user.name || "User Name" %></h2>
+      <h2 class="text-2xl font-bold mb-4"><%= user?.name || "User Name" %></h2>
 
       <div class="mb-4">
         <p class="font-semibold">Skills Offered:</p>
         <ul class="list-disc list-inside text-gray-700">
-          <% user.skillsOffered.forEach(skill => { %>
-            <li><%= skill %></li>
-          <% }) %>
+          <% if (user?.skillsOffered && user.skillsOffered.length > 0) { %>
+            <% user.skillsOffered.forEach(skill => { %>
+              <li><%= skill %></li>
+            <% }) %>
+          <% } else { %>
+            <li>No skills listed.</li>
+          <% } %>
         </ul>
       </div>
 
       <div class="mb-4">
         <p class="font-semibold">Skills Wanted:</p>
         <ul class="list-disc list-inside text-gray-700">
-          <% user.skillsWanted.forEach(skill => { %>
-            <li><%= skill %></li>
-          <% }) %>
+          <% if (user?.skillsWanted && user.skillsWanted.length > 0) { %>
+            <% user.skillsWanted.forEach(skill => { %>
+              <li><%= skill %></li>
+            <% }) %>
+          <% } else { %>
+            <li>No skills wanted.</li>
+          <% } %>
         </ul>
       </div>
 
@@ -58,7 +66,7 @@
     <!-- Right Side -->
     <div class="flex-shrink-0 self-center">
       <div class="w-40 h-40 rounded-full border-4 border-gray-300 overflow-hidden">
-        <img src="<%= user.profilePhoto || 'https://i.pravatar.cc/200' %>" alt="Profile Photo" class="w-full h-full object-cover">
+        <img src="<%= user?.profilePhoto || 'https://i.pravatar.cc/200' %>" alt="Profile Photo" class="w-full h-full object-cover">
       </div>
     </div>
   </main>
