@@ -176,21 +176,14 @@
 
       <div class="mb-5">
         <label for="offeredSkillSelect" class="block text-lg mb-2 text-gray-300">Choose one of your offered skills</label>
-        <select name="offeredSkill" id="offeredSkillSelect" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white" required>
-          <% if (user && user.skillsOffered && user.skillsOffered.length > 0) { %>
-            <% user.skillsOffered.forEach(skill => { %>
-              <option value="<%= skill %>"><%= skill %></option>
-            <% }) %>
-          <% } else { %>
-            <option value="" disabled selected>No skills offered</option>
-          <% } %>
-        </select>
+     <input name="wantedSkill" id="wantedSkillsSelect" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white" required>
+      </input>
       </div>
 
       <div class="mb-5">
         <label for="wantedSkillsSelect" class="block text-lg mb-2 text-gray-300">Choose one of their wanted skills</label>
-        <select name="wantedSkill" id="wantedSkillsSelect" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white" required>
-        </select>
+        <input name="wantedSkill" id="wantedSkillsSelect" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white" required>
+      </input>
       </div>
 
       <div class="mb-6">
