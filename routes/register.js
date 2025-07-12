@@ -9,13 +9,17 @@ router.get("/register", (req, res) => {
 
 // Handle Register Form
 router.post("/register", async (req, res) => {
-  const { email, password, skillsOffered, skillsWanted } = req.body;
+  const { name, email, password, skillsOffered, skillsWanted } = req.body;
 
   try {
-    const existing = await User.findOne({ email });
-    if (existing) return res.render("auth/register", { error: "Email already exists" });
+    const existing = await User.findOne({ $or: [{ email }, { name }] });
+    if (existing) {
+      const msg = existing.email === email ? "Email already exists" : "Username already taken";
+      return res.render("auth/register", { error: msg });
+    }
 
     const user = new User({
+      name,
       email,
       password,
       skillsOffered: skillsOffered.split(",").map(s => s.trim()),
@@ -27,7 +31,7 @@ router.post("/register", async (req, res) => {
     res.redirect("/");
   } catch (err) {
     console.error(err);
-    res.render("auth/register", { error: "Registration failed" });
+    res.render("auth/register", { error: "Registration failed. Try again." });
   }
 });
 

@@ -13,6 +13,9 @@ require("./config/db")();
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: true })); // To read form data
+
+
 
 app.use(session({
   secret: "skill-secret",
